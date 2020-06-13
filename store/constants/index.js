@@ -1,0 +1,1 @@
+export const ESTIMATED_VALUE = 'ESTIMATED_VALUE'
