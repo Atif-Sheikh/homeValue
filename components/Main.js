@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -21,8 +21,11 @@ import Distributions from './Distributions'
 import Graphs from './Graphs'
 import SalesStatus from './SalesStatus'
 
+
 const Main = (props) => {
   console.log(props.estimatedValue)
+  console.log(props.email)
+  const [success,setSeuccess ] = useState('');
 
   sendMail = () =>{
     let data = props.estimatedValue.valuations;
@@ -37,7 +40,7 @@ const Main = (props) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      dest:'masterqasim17@gmail.com',
+      dest:props.email,
       EMV:data.general.EMV,
       accuracy:data.general.accuracy,
       low:data.general.low,
@@ -78,7 +81,10 @@ const Main = (props) => {
 
     })
   })
-  .then((res)=>{console.log(res)})
+  .then((res)=>{
+    console.log(res)
+    setSeuccess('Email sended')
+  })
   .catch((err=>{console.log(err)}))
     console.log('mail send')
   }
@@ -95,7 +101,7 @@ const Main = (props) => {
         <Information/>
         <Distributions/>
         <Graphs/>
-        <SalesStatus/>
+        {/* <SalesStatus/> */}
         <TouchableOpacity onPress={sendMail}
             style={{ 
                 backgroundColor:'#00b359' ,
@@ -106,6 +112,7 @@ const Main = (props) => {
                 }}>
             <Text style={{color:'#fff',fontSize:20,textAlign:'center'}}>Send Email</Text>
         </TouchableOpacity>
+        <Text style={{fontSize:20,textAlign:'center',marginVertical:10}}>{success}</Text>
       </>
       :
       <></>
@@ -116,7 +123,9 @@ const Main = (props) => {
 };
 const mapStateToProps = (state) => {
   return{
-      estimatedValue:state.estimatedValueReducer.estimatedValue
+      estimatedValue:state.estimatedValueReducer.estimatedValue,
+      email:state.setEmailReducer.email
   }
 }
+
 export default connect(mapStateToProps,null)(Main)

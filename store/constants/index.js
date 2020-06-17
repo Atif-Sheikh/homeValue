@@ -1,1 +1,2 @@
 export const ESTIMATED_VALUE = 'ESTIMATED_VALUE'
+export const SET_EMAIL = 'SET_EMAIL'

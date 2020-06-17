@@ -20,17 +20,23 @@ import { connect } from 'react-redux';
 
 import Main from './components/Main'
 import BuyerInfo from './components/BuyerInfo'
+import Login from './components/Login'
+import Signup from './components/Signup'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
+import './components/config'
 
 const Stack = createStackNavigator();
 const App = (props) => {
   console.log(props.estimatedValue)
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="BuyerInfo">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="BuyerInfo" component={BuyerInfo} options={{headerShown: false}}/>
         <Stack.Screen name="Main" component={Main} options={{headerShown: false}}/>
+        <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
+        <Stack.Screen name="Signup" component={Signup} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

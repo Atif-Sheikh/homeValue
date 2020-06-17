@@ -34,6 +34,21 @@ export class MainInput extends Component {
                 console.log('errrror',err)
                 this.setState({error:err})
             })
+            //======================= for map ====================
+        // fetch(`https://slipstream.homejunction.com/ws/addresses/geocode?deliveryLine=${this.replace(this.state.houseNo)}&city=${this.replace(this.state.city)}&state=${this.state.liveState}&zip=${this.state.zip}&radius=1`, { 
+        //     headers: {
+        //         // "Hji-Slipstream-Token": json.result.token
+        //         Authorization: "s9-a61f1c24-a8b8-48c0-9f2a-5ff07be61f0b"
+        //     }
+        //     }).then((res)=>{
+        //         return res.json()
+        //     }).then((json)=>{
+        //         console.log(json.result)
+        //         // this.props.setEstimatedValue(json.result)
+        //     }).catch((err)=>{
+        //         console.log('errrror',err)
+        //         // this.setState({error:err})
+        //     })    
         // fetch('https://slipstream.homejunction.com//ws/api/authenticate?license=2AFD-3DA9-584D-F5AE',{
         //     method: "GET",
         // }).then((res)=>{
