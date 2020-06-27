@@ -22,13 +22,13 @@ export class SignUp extends React.Component {
         this.props.setEmail(email)
         firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(user => {
-          const userUid = auth().currentUser.uid;
+          const userUid = firebase.auth().currentUser.uid;
           let obj = {
             fName:this.state.fName,
             lName:this.state.lName,
             
           }
-          database().ref('users').child(userUid).set(obj)
+          firebase.database().ref('users').child(userUid).set(obj)
           this.props.navigation.navigate('Main')
   
         })

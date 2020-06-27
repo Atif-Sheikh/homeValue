@@ -23,7 +23,7 @@ export class MainInput extends Component {
         fetch(`https://slipstream.homejunction.com/ws/avm?deliveryLine=${this.replace(this.state.houseNo)}&city=${this.replace(this.state.city)}&state=${this.state.liveState}&zip=${this.state.zip}&radius=1`, { 
             headers: {
                 // "Hji-Slipstream-Token": json.result.token
-                Authorization: "s9-a61f1c24-a8b8-48c0-9f2a-5ff07be61f0b"
+                Authorization: "s9-aec9c76c-feff-4d53-9c55-287fc3777585"
             }
             }).then((res)=>{
                 return res.json()
