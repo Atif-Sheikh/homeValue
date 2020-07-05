@@ -6,7 +6,8 @@ import {
   View,
   Text,
   StatusBar,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -26,13 +27,19 @@ const Main = (props) => {
   console.log(props.estimatedValue)
   console.log(props.email)
   const [success,setSeuccess ] = useState('');
+  const [loading , setLoding] = useState(false);
 
+  buyProperty = () => {
+    props.navigation.navigate('Buy')
+  }
   sendMail = () =>{
     let data = props.estimatedValue.valuations;
     let data1 = props.estimatedValue.attributes;
     let data2 = props.estimatedValue.address;
     let data3 = props.estimatedValue.heuristics
     let data4 = props.estimatedValue.distributions;
+
+    setLoding(true)
 
     fetch('https://nameless-mountain-13494.herokuapp.com/api/sentmail', {
     method: 'POST',
@@ -82,10 +89,15 @@ const Main = (props) => {
     })
   })
   .then((res)=>{
+    
     console.log(res)
     setSeuccess('Email sended')
+    setLoding(false)
   })
-  .catch((err=>{console.log(err)}))
+  .catch((err=>{console.log(err)
+  
+    setLoding(false)
+  }))
     console.log('mail send')
   }
   return (
@@ -102,6 +114,16 @@ const Main = (props) => {
         <Distributions/>
         <Graphs/>
         {/* <SalesStatus/> */}
+        <TouchableOpacity onPress={buyProperty}
+            style={{ 
+                backgroundColor:'#00b359' ,
+                marginHorizontal:15,
+                borderRadius:10,
+                margin:10
+                ,padding:10
+                }}>
+            <Text style={{color:'#fff',fontSize:20,textAlign:'center'}}>Buy This Property</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={sendMail}
             style={{ 
                 backgroundColor:'#00b359' ,
@@ -112,6 +134,9 @@ const Main = (props) => {
                 }}>
             <Text style={{color:'#fff',fontSize:20,textAlign:'center'}}>Send Email</Text>
         </TouchableOpacity>
+        <ActivityIndicator
+          animating = {loading}   
+      />
         <Text style={{fontSize:20,textAlign:'center',marginVertical:10}}>{success}</Text>
       </>
       :

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View ,TextInput, TouchableOpacity, Image } from 'react-native'
+import { Text, StyleSheet, View ,TextInput, TouchableOpacity, Image ,ActivityIndicator} from 'react-native'
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icons5 from './Icons5'
 import {setEstimatedValue} from '../store/actions'
+import * as firebase from "firebase";
 
 export class MainInput extends Component {
     state={
@@ -14,12 +15,14 @@ export class MainInput extends Component {
         city:'',
         focus:'',
         error:'',
+        loading:false
 
     }
     replace = (e) =>{
         return e.replace(" ", "+")
     }
     search = () => {
+        this.setState({loading:true})
         fetch(`https://slipstream.homejunction.com/ws/avm?deliveryLine=${this.replace(this.state.houseNo)}&city=${this.replace(this.state.city)}&state=${this.state.liveState}&zip=${this.state.zip}&radius=1`, { 
             headers: {
                 // "Hji-Slipstream-Token": json.result.token
@@ -30,9 +33,14 @@ export class MainInput extends Component {
             }).then((json)=>{
                 console.log(json.result.address)
                 this.props.setEstimatedValue(json.result)
+                const nod = this.props.email.replace(".","dot").replace("@","at");
+                const data = this.props.estimatedValue.valuations.general.EMV;
+                firebase.database().ref('users').child(nod).update({ amount: data*100 })
+                this.setState({loading:false})
             }).catch((err)=>{
                 console.log('errrror',err)
                 this.setState({error:err})
+                this.setState({loading:false})
             })
             //======================= for map ====================
         // fetch(`https://slipstream.homejunction.com/ws/addresses/geocode?deliveryLine=${this.replace(this.state.houseNo)}&city=${this.replace(this.state.city)}&state=${this.state.liveState}&zip=${this.state.zip}&radius=1`, { 
@@ -168,7 +176,9 @@ export class MainInput extends Component {
                         </Text>
                     </TouchableOpacity>
                 </View>
-
+                <ActivityIndicator
+                    animating = {this.state.loading}   
+                />
             </View>
         )
     }
@@ -178,8 +188,13 @@ const mapDispatchToProps = dispatch => {
         setEstimatedValue:(obj)=>dispatch(setEstimatedValue(obj))
     }
 }
-
-export default connect(null,mapDispatchToProps)(MainInput)
+const mapStateToProps = (state) => {
+  return{
+        estimatedValue:state.estimatedValueReducer.estimatedValue,
+        email:state.setEmailReducer.email
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(MainInput)
 
 const styles = StyleSheet.create({
     heading:{

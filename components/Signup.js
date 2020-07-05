@@ -20,15 +20,19 @@ export class SignUp extends React.Component {
    
     if(email != ' ', password != ' ', fName != ' ', lName != ' '){
         this.props.setEmail(email)
+        const nod = email.replace(".","dot").replace("@","at")
         firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(user => {
           const userUid = firebase.auth().currentUser.uid;
           let obj = {
             fName:this.state.fName,
             lName:this.state.lName,
+            amount:'',
+            paid:false,
             
           }
-          firebase.database().ref('users').child(userUid).set(obj)
+          // firebase.database().ref('users').child(email).set(obj)
+          firebase.database().ref('users').child(nod).set(obj)
           this.props.navigation.navigate('Main')
   
         })

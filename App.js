@@ -22,6 +22,8 @@ import Main from './components/Main'
 import BuyerInfo from './components/BuyerInfo'
 import Login from './components/Login'
 import Signup from './components/Signup'
+import Buy from './components/Buy'
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -37,6 +39,7 @@ const App = (props) => {
         <Stack.Screen name="Main" component={Main} options={{headerShown: false}}/>
         <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
         <Stack.Screen name="Signup" component={Signup} options={{headerShown: false}}/>
+        <Stack.Screen name="Buy" component={Buy} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
