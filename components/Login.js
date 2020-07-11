@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, TextInput, View, Button ,TouchableOpacity,Dimensions,Image,SafeAreaView,ScrollView} from 'react-native'
 import * as firebase from "firebase";
-import {setEmail} from '../store/actions'
+import {setEmail ,setAuth } from '../store/actions'
 import { connect } from 'react-redux';
 
 export class Login extends React.Component {
@@ -12,10 +12,24 @@ export class Login extends React.Component {
     if(email != ' ', password != ' '){
         this.props.setEmail(email)
         firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(() => {this.props.navigation.navigate('Main')})
+        .then(() => {
+          const userUid = firebase.auth().currentUser.uid;
+          this.props.setAuth(userUid)
+          firebase.database().ref('users').child(userUid).on("value",(data)=>{
+            let status = data.val(); 
+            
+            if(status){
+
+              this.props.navigation.navigate('Main')
+            }
+            else{
+              this.props.navigation.navigate('BuyerInfo')
+            }
+        })
+      })
         .catch(error => this.setState({ errorMessage: error.message }))
     }
-  }
+}
 
   render() {
     const window = Dimensions.get("window");
@@ -69,7 +83,8 @@ export class Login extends React.Component {
 }
 const mapDispatchToProps = dispatch => {
     return {
-      setEmail:(value)=>dispatch(setEmail(value))
+      setEmail:(value)=>dispatch(setEmail(value)),
+      setAuth:(value)=>dispatch(setAuth(value))
     }
   }
 export default connect(null,mapDispatchToProps)(Login)  

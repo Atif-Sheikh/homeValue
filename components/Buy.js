@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View,Linking  } from 'react-native'
+import { WebView } from 'react-native-webview';
 
 import * as firebase from "firebase";
 
@@ -18,11 +19,17 @@ export class Buy extends Component {
         })
     }
     render() {
-        return (
-            <View style={{flex:1,justifyContent:'center'}}>
-                <Text style={{textAlign:'center',fontSize:20}}> make payment </Text>
-            </View>
-        )
+        const uri ='https://polar-wildwood-95264.herokuapp.com/'
+        return <WebView
+        ref={(ref) => { this.webview = ref; }}
+        source={{ uri }}
+        onNavigationStateChange={(event) => {
+          if (event.url !== uri) {
+            this.webview.stopLoading();
+            Linking.openURL(event.url);
+          }
+        }}
+      />
     }
 }
 const mapStateToProps = (state) => {
@@ -32,3 +39,4 @@ const mapStateToProps = (state) => {
   }
   
 export default connect(mapStateToProps,null)(Buy)
+{/* <WebView source={{ uri: 'https://polar-wildwood-95264.herokuapp.com/' }} />; */}

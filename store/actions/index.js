@@ -1,4 +1,4 @@
-import { ESTIMATED_VALUE ,SET_EMAIL } from '../constants'
+import { ESTIMATED_VALUE ,SET_EMAIL,SET_USER_AUTH } from '../constants'
 
 export function setEstimatedValue(value){
     return{
@@ -10,5 +10,11 @@ export function setEmail(value){
     return{
         type:SET_EMAIL,
         payload: value
+    }
+}
+export function setAuth(tok){
+    return{
+        type:SET_USER_AUTH,
+        payload: tok
     }
 }

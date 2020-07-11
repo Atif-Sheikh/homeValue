@@ -7,10 +7,13 @@ import {
   Text,
   StatusBar,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  Linking
 } from 'react-native';
 
 import { connect } from 'react-redux';
+
+import * as firebase from "firebase";
 
 import EstimatedValue from './EstimatedValue'
 import MainInput from './MainInput'
@@ -28,9 +31,31 @@ const Main = (props) => {
   console.log(props.email)
   const [success,setSeuccess ] = useState('');
   const [loading , setLoding] = useState(false);
+  const [paid , setPaid] = useState(false);
 
   buyProperty = () => {
-    props.navigation.navigate('Buy')
+    // props.navigation.navigate('Buy')
+    Linking.canOpenURL('https://polar-wildwood-95264.herokuapp.com/').then(supported => {
+      if (supported) {
+        Linking.openURL('https://polar-wildwood-95264.herokuapp.com/');
+      } else {
+        console.log("Don't know how to open URI: " + 'https://polar-wildwood-95264.herokuapp.com/');
+      }
+    });
+    const nod = props.email.replace(".","dot").replace("@","at")
+    
+    console.log(nod)
+        // firebase.database().ref('users').child(nod).on("value",(data)=>{
+        //     const status = data.val();
+        //     console.log('[:->)]',status.paid)
+        //     if(status.paid == true){
+        //         // this.props.navigation.navigate('Main')
+        //         setPaid(true)
+        //     }
+        //     else{
+        //       setPaid(false)
+        //     }
+        // })
   }
   sendMail = () =>{
     let data = props.estimatedValue.valuations;
@@ -114,7 +139,7 @@ const Main = (props) => {
         <Distributions/>
         <Graphs/>
         {/* <SalesStatus/> */}
-        <TouchableOpacity onPress={buyProperty}
+        {/* <TouchableOpacity onPress={buyProperty}
             style={{ 
                 backgroundColor:'#00b359' ,
                 marginHorizontal:15,
@@ -123,7 +148,9 @@ const Main = (props) => {
                 ,padding:10
                 }}>
             <Text style={{color:'#fff',fontSize:20,textAlign:'center'}}>Buy This Property</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        {/* {paid && <Text style={{textAlign:'center'}}> Payment successfull</Text>} */}
+        <Text style={{fontSize:18,marginTop:10,marginHorizontal:10}}> Recieve this data through email.</Text>
         <TouchableOpacity onPress={sendMail}
             style={{ 
                 backgroundColor:'#00b359' ,

@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, View, Button ,Image,TouchableOpacity,Dimen
 import * as firebase from "firebase";
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import {setEmail} from '../store/actions'
+import {setEmail ,setAuth } from '../store/actions'
 import { connect } from 'react-redux';
 
 export class SignUp extends React.Component {
@@ -20,20 +20,18 @@ export class SignUp extends React.Component {
    
     if(email != ' ', password != ' ', fName != ' ', lName != ' '){
         this.props.setEmail(email)
-        const nod = email.replace(".","dot").replace("@","at")
         firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(user => {
           const userUid = firebase.auth().currentUser.uid;
+          this.props.setAuth(userUid)
           let obj = {
             fName:this.state.fName,
             lName:this.state.lName,
-            amount:'',
             paid:false,
             
           }
-          // firebase.database().ref('users').child(email).set(obj)
-          firebase.database().ref('users').child(nod).set(obj)
-          this.props.navigation.navigate('Main')
+          firebase.database().ref('users').child(userUid).set(obj)
+          this.props.navigation.navigate('BuyerInfo')
   
         })
         .catch(error => this.setState({ errorMessage: error.message }))
@@ -106,7 +104,8 @@ export class SignUp extends React.Component {
 }
 const mapDispatchToProps = dispatch => {
     return {
-      setEmail:(value)=>dispatch(setEmail(value))
+      setEmail:(value)=>dispatch(setEmail(value)),
+      setAuth:(value)=>dispatch(setAuth(value))
     }
   }
   export default connect(null,mapDispatchToProps)(SignUp)  
