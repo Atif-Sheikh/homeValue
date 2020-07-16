@@ -33,9 +33,9 @@ export class MainInput extends Component {
             }).then((json)=>{
                 console.log(json.result.address)
                 this.props.setEstimatedValue(json.result)
-                const nod = this.props.email.replace(".","dot").replace("@","at");
-                const data = this.props.estimatedValue.valuations.general.EMV;
-                firebase.database().ref('users').child(nod).update({ amount: data*100,paid:false })
+                // const nod = this.props.email.replace(".","dot").replace("@","at");
+                // const data = this.props.estimatedValue.valuations.general.EMV;
+                // firebase.database().ref('users').child(nod).update({ amount: data*100,paid:false })
                 this.setState({loading:false})
             }).catch((err)=>{
                 console.log('errrror',err)
