@@ -139,7 +139,7 @@ const Main = (props) => {
         <Distributions/>
         <Graphs/>
         {/* <SalesStatus/> */}
-        {/* <TouchableOpacity onPress={buyProperty}
+        <TouchableOpacity onPress={buyProperty}
             style={{ 
                 backgroundColor:'#00b359' ,
                 marginHorizontal:15,
@@ -148,8 +148,8 @@ const Main = (props) => {
                 ,padding:10
                 }}>
             <Text style={{color:'#fff',fontSize:20,textAlign:'center'}}>Buy This Property</Text>
-        </TouchableOpacity> */}
-        {/* {paid && <Text style={{textAlign:'center'}}> Payment successfull</Text>} */}
+        </TouchableOpacity>
+        {paid && <Text style={{textAlign:'center'}}> Payment successfull</Text>}
         <Text style={{fontSize:18,marginTop:10,marginHorizontal:10}}> Recieve this data through email.</Text>
         <TouchableOpacity onPress={sendMail}
             style={{ 
