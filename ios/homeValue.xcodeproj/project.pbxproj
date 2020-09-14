@@ -44,7 +44,7 @@
 		00E356EE1AD99517003FC87E /* homeValueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = homeValueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* homeValueTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = homeValueTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* homeValue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = homeValue.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* Give Me The Home Value.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Give Me The Home Value.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = homeValue/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = homeValue/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* homeValue.app */,
+				13B07F961A680F5B00A75B9A /* Give Me The Home Value.app */,
 				00E356EE1AD99517003FC87E /* homeValueTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* homeValue-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* homeValue-tvOSTests.xctest */,
@@ -238,7 +238,7 @@
 			);
 			name = homeValue;
 			productName = homeValue;
-			productReference = 13B07F961A680F5B00A75B9A /* homeValue.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* Give Me The Home Value.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* homeValue-tvOS */ = {
@@ -736,13 +736,14 @@
 				);
 				INFOPLIST_FILE = homeValue/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeValue;
-				PRODUCT_NAME = homeValue;
+				PRODUCT_NAME = "Give Me The Home Value";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -759,13 +760,14 @@
 				DEVELOPMENT_TEAM = 4ZHK9HY7Y5;
 				INFOPLIST_FILE = homeValue/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeValue;
-				PRODUCT_NAME = homeValue;
+				PRODUCT_NAME = "Give Me The Home Value";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
